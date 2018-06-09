@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Home</h2>
+@Html.ValidationSummary()
+<div>
+    @Html.ActionLink("Войти", "Login", "Account")
+</div>
+<div>
+    @Html.ActionLink("Выйти", "LogOff", "Account")
+</div>
+<div>
+    @Html.ActionLink("Пользователь", "Index", "User")
+</div>
+<div>
+    @Html.ActionLink("Перейти к заметкам","ShowNotes","Note")
+</div>

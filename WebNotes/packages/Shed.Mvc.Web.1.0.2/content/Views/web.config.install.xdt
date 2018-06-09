@@ -1,0 +1,7 @@
+﻿<?xml version="1.0"?>
+
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <system.web.webPages.razor>
+    <pages pageBaseType="Shed.Mvc.Web.WebViewPage" xdt:Transform="SetAttributes" />
+  </system.web.webPages.razor>
+</configuration>

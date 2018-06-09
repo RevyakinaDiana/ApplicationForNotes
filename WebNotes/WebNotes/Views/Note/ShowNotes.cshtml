@@ -1,0 +1,48 @@
+﻿@model WebNotes.Models.NotesListViewModel
+@using WebLibrary
+@using WebNotes.Extensions
+@{
+    ViewBag.Title = "ShowNotes";
+}
+
+
+<div style="padding: 20px;">
+    @Html.Partial("Filter", new NoteFilter())
+</div>
+
+<h2>Заметки</h2>
+<table>
+  
+    <tr>
+        <th>
+           
+                @Html.SortLink("Название", "Name", "ShowNotes", "Note", new RouteValueDictionary { { "id", Model.Notes[0].Autor.Id } })
+            
+         
+        <th>
+           
+                @Html.SortLink("Дата создания", "DateCreated", "ShowNotes", "Note", new RouteValueDictionary { { "id", Model.Notes[0].Autor.Id } })
+            
+         
+        </th>
+
+    </tr>
+    @foreach(var note in Model.Notes)
+    {
+        <tr>
+            
+            
+            <td>@note.Name</td>
+            <td>@note.DateCreated</td>
+            <td>@Html.ActionLink("Посмотреть заметку", "TextNote", "Note", new { id = note.Id }, null)</td>
+        </tr>
+        
+    }
+    <tr>
+        <td>@Html.ActionLink("Добавить новую заметку", "CreateNote", "Note")</td>
+    </tr>
+    
+</table>
+<div>
+    @Html.ActionLink("Вернуться назад", "Index","Home")
+</div>

@@ -1,0 +1,15 @@
+﻿
+@model WebLibrary.NoteFilter
+@using (Html.BeginForm("ShowNotes", "Note", FormMethod.Get))
+{
+    <div>
+        Название: @Html.EditorFor(m => m.Name)
+    </div>
+    <div>
+        Дата создания: @Html.EditorFor(m => m.DateCreated)
+    </div>
+    <div>
+        <input type="submit" value="Поиск" />
+    </div>
+}
+

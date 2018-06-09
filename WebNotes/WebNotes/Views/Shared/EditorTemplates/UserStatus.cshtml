@@ -1,0 +1,11 @@
+﻿@using WebLibrary
+@model WebLibrary.Status?
+@(Html.DropDownList("", Enum.GetValues(typeof(Status))
+    .Cast<Status>()
+    .Select(e => new SelectListItem
+    {
+        Text = Enum.GetName(typeof(Status), e),
+        Value = e.ToString(),
+        Selected = Model != null && Model.Value == e
+    }), new { @class = "form-control" }))
+

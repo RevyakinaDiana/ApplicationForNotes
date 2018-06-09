@@ -1,0 +1,37 @@
+﻿@model WebNotes.Models.AddNoteViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Добавление новой заметки</h2>
+@using (Html.BeginForm("CreateNote", "Note", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <table>
+        <tr>
+            <td> @Html.LabelFor(m => m.Name)</td>
+            <td> @Html.EditorFor(m => m.Name) </td>
+        </tr>
+        <tr>
+            <td>  @Html.LabelFor(m => m.Text)</td>
+            <td>  @Html.EditorFor(m => m.Text)</td>
+        </tr>
+        <div class="form-group">
+            @Html.LabelFor(model => model.File, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.File, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.File, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <tr>
+            <td></td>
+            <td>
+                <button style="width:100%">
+                    Добавить
+
+                </button>
+            </td>
+    </table>
+}

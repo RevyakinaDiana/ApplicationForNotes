@@ -1,0 +1,49 @@
+﻿@model WebNotes.Models.AddUserViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Добавление нового пользователя</h2>
+@using (Html.BeginForm("CreateUser", "User", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <table>
+        <tr>
+            <td> @Html.LabelFor(m => m.UserName)</td>
+            <td> @Html.EditorFor(m => m.UserName) </td>
+        </tr>
+        <tr>
+            <td>  @Html.LabelFor(m => m.Password)</td>
+            <td>  @Html.EditorFor(m => m.Password)</td>
+        </tr>
+        <tr>
+            <td>  @Html.LabelFor(m => m.LastName)</td>
+            <td>  @Html.EditorFor(m => m.LastName)</td>
+        </tr>
+        <tr>
+            <td>  @Html.LabelFor(m => m.FirstName)</td>
+            <td>  @Html.EditorFor(m => m.FirstName)</td>
+        </tr>
+        <tr>
+            <td>  @Html.LabelFor(m => m.SecondName)</td>
+            <td>  @Html.EditorFor(m => m.SecondName)</td>
+        </tr>
+
+
+
+        @*<tr>
+                <td>  @Html.LabelFor(m => m.user.Email)</td>
+                <td>  @Html.EditorFor(m => m.user.Email)</td>
+            </tr>*@
+
+        <tr>
+            <td></td>
+            <td>
+                <button style="width:100%">
+                    Добавить
+
+                </button>
+            </td>
+    </table>
+}

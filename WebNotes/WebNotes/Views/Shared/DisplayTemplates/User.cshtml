@@ -1,0 +1,7 @@
+﻿@using WebLibrary
+@if (Model != null)
+{
+    @(!string.IsNullOrEmpty(Model.FirstName) ? $"{Model.FirstName}({Model.UserName})" : Model.UserName)
+}
+
+

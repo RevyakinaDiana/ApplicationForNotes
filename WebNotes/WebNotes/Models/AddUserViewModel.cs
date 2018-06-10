@@ -18,7 +18,9 @@ namespace WebNotes.Models
                 FirstName = FirstName,
                 SecondName = SecondName,
                 LastName = LastName,
-
+                Email= Email,
+                DateofBirth=DateOfBith,
+                Permission = Permission.Common
             };
         }
 
@@ -42,5 +44,14 @@ namespace WebNotes.Models
 
         [Display(Name = "Отчество")]
         public string SecondName { get; set; }
+
+        public string Email { get; set; }
+
+
+        [Display(Name = "Дата рождения")]
+        public DateTime DateOfBith { get; set; }
+
+
+        public Permission Permission { get; set; }
     }
 }

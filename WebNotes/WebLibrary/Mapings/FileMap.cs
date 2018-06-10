@@ -14,7 +14,7 @@ namespace WebLibrary.Mapings
             Id(f => f.FileId).GeneratedBy.Identity();
             Map(f => f.Name).Length(255);
             Map(f => f.Content).Length(int.MaxValue);
-
+            Map(f => f.Type).Length(150);
         }
     }
 }

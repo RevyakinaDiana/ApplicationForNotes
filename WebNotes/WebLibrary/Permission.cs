@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace WebLibrary
 {
-    public class Permission
+    public enum Permission
     {
-        public virtual long PermissionID { get; set; }
-        public virtual int PermissionLevel { get; set; }
-        public virtual string Description { get; set; }
+     Admin,
+      Common
     }
 }

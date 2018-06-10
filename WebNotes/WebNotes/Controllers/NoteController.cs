@@ -16,9 +16,11 @@ namespace WebNotes.Controllers
         
         // GET: Note
         private NoteRepository noteRepository;
-        public NoteController(NoteRepository noteRepository, UserRepository userRepository):base(userRepository)
+        private FileRepository fileRepository;
+        public NoteController(NoteRepository noteRepository, UserRepository userRepository, FileRepository fileRepository) :base(userRepository)
         {
             this.noteRepository = noteRepository;
+            this.fileRepository = fileRepository;
            
         }
 
@@ -55,25 +57,25 @@ namespace WebNotes.Controllers
         [HttpPost]
         public ActionResult CreateNote(AddNoteViewModel model)
         {
-           
+
+            var file = new File()
+            {
+                Name = model.File.FileName,
+                Content = model.File.InputStream.ToByteArray(),
+                Type = model.File.ContentType
+            };
+
+            fileRepository.Save(file);
             Note note = new Note
             {
-                Name=model.Name,
-                Text=model.Text,
-                Autor = CurrentUser,
+                Name = model.Name,
+                Text = model.Text,
                 DateCreated = DateTime.Now,
                 DateChenged = DateTime.Now,
-                File = new File
-                {
-
-                    Name = model.File.FileName,
-                    Content = model.File.InputStream.ToByteArray()
-                }
-                
-
+                Autor = CurrentUser,
+                File = file
             };
-            
-            
+
             noteRepository.Save(note);
             
             return RedirectToAction("ShowNotes", "Note");
@@ -102,6 +104,15 @@ namespace WebNotes.Controllers
                 Text = note.Text,
                 
             });
+        }
+        public FileContentResult GetFile(long id)
+        {
+            var f = noteRepository.Load(id).File;
+            byte[] fileContents = f.Content;
+            string contentType = f.Type;
+            FileContentResult result = new FileContentResult(fileContents, contentType);
+            result.FileDownloadName = f.Name;
+            return result;
         }
     }
 }

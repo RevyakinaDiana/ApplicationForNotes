@@ -21,7 +21,7 @@ namespace WebLibrary.Mapings
             Map(u => u.Email).Length(100);
             Map(u => u.DateofBirth);
             References(u => u.Avatar);
-            References(u => u.Permission);
+            Map(u => u.Permission);
             Map(u => u.Status);
         }
     }

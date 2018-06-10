@@ -653,6 +653,7 @@
     <Compile Include="Models\AddNoteViewModel.cs" />
     <Compile Include="Models\AddUserViewModel.cs" />
     <Compile Include="Models\EditViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\NotesListViewModel.cs" />
     <Compile Include="Models\SortLinkModel.cs" />
@@ -678,7 +679,7 @@
     <Content Include="Views\User\CreateUser.cshtml" />
     <Content Include="Views\User\Change.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\User.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\UserStatus.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Status.cshtml" />
     <Content Include="Views\Note\ShowNotes.cshtml" />
     <Content Include="Views\Note\CreateNote.cshtml" />
     <Content Include="Views\Note\TextNote.cshtml" />
@@ -686,6 +687,7 @@
     <Content Include="Views\Shared\SortLink.cshtml" />
     <Content Include="Views\Note\Filter.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\HttpPostedFileBase.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Status.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

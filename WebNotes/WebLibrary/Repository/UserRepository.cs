@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using NHibernate;
+using NHibernate.Criterion;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,20 @@ namespace WebLibrary.Repository
                 return null;
             }
             return Load(userId);
+        }
+        public User FindByLogin(string login)
+        {
+            var crit = session.CreateCriteria<User>();
+            crit.Add(Restrictions.Eq("UserName", login));
+            try
+            {
+                return crit.List<User>().FirstOrDefault();
+            }
+            catch
+            {
+                User user = null;
+                return user;
+            }
         }
     }
 }

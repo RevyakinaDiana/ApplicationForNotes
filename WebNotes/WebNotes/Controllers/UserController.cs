@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebLibrary;
 using WebLibrary.Repository;
 using WebNotes.Fold;
 using WebNotes.Models;
@@ -22,7 +23,7 @@ namespace WebNotes.Controllers
             get { return HttpContext.GetOwinContext().Get<UserManager>(); }
         }
         private UserRepository userRepository;
-      
+        
         // GET: User
         public ActionResult Index()
         {
@@ -43,6 +44,7 @@ namespace WebNotes.Controllers
         {
             var user = model.GetUser();
             var result = UserManager.CreateAsync(user, model.Password);
+
             if (!result.Result.Succeeded)
             {
                 foreach (var error in result.Result.Errors)
@@ -50,8 +52,22 @@ namespace WebNotes.Controllers
                     ModelState.AddModelError("", error);
                 }
             }
-            return RedirectToAction("Index", "User");
+           if(CurrentUser==null)
+            {
+                UserManager.CreateAsync(user, model.Password);
+                return RedirectToAction("Login", "Account");
+            }
+           else
+            {
+                return RedirectToAction("Index", "User");
+            }
+                return RedirectToAction("Index", "User");
+            
+           
         }
+        
+    
+
         [HttpPost]
         public ActionResult Change(EditViewModel model)
         {

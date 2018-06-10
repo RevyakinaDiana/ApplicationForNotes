@@ -11,9 +11,12 @@
 </div>
 
 <h2>Заметки</h2>
-<table>
-  
+<table border="1">
+  @if(Model.Notes.Count != 0)
+  {
     <tr>
+        
+       
         <th>
            
                 @Html.SortLink("Название", "Name", "ShowNotes", "Note", new RouteValueDictionary { { "id", Model.Notes[0].Autor.Id } })
@@ -25,8 +28,17 @@
             
          
         </th>
-
+        
+  
+       
     </tr>
+    }
+  else
+    { 
+      <tr>
+          <td>Заметок нет</td>
+      </tr>
+    }
     @foreach(var note in Model.Notes)
     {
         <tr>
@@ -35,14 +47,17 @@
             <td>@note.Name</td>
             <td>@note.DateCreated</td>
             <td>@Html.ActionLink("Посмотреть заметку", "TextNote", "Note", new { id = note.Id }, null)</td>
+            <td>@Html.ActionLink("Открыть файл", "GetFile", "Note", new { id =note.Id }, null)</td>
         </tr>
         
     }
-    <tr>
-        <td>@Html.ActionLink("Добавить новую заметку", "CreateNote", "Note")</td>
-    </tr>
+    
     
 </table>
+<div>
+   @Html.ActionLink("Добавить новую заметку", "CreateNote", "Note")
+    
+</div>
 <div>
     @Html.ActionLink("Вернуться назад", "Index","Home")
 </div>

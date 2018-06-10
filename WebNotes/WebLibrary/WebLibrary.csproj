@@ -114,12 +114,12 @@
     <Compile Include="File.cs" />
     <Compile Include="Mapings\FileMap.cs" />
     <Compile Include="Mapings\NoteMap.cs" />
-    <Compile Include="Mapings\PermissionMap.cs" />
     <Compile Include="Mapings\UserMap.cs" />
     <Compile Include="Note.cs" />
     <Compile Include="NoteFilter.cs" />
     <Compile Include="Permission.cs" />
     <Compile Include="RangeDateTime.cs" />
+    <Compile Include="Repository\FileRepository.cs" />
     <Compile Include="Repository\NoteRepository.cs" />
     <Compile Include="Repository\RepositoryAttribute.cs" />
     <Compile Include="Repository\UserRepository.cs" />

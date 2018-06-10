@@ -1,19 +1,17 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿@model WebNotes.Models.HomeViewModel
+    @using WebLibrary
 
-<h2>Home</h2>
 @Html.ValidationSummary()
-<div>
-    @Html.ActionLink("Войти", "Login", "Account")
-</div>
+
 <div>
     @Html.ActionLink("Выйти", "LogOff", "Account")
 </div>
+@if (Model.Log == Permission.Admin)
+{
 <div>
     @Html.ActionLink("Пользователь", "Index", "User")
 </div>
+}
 <div>
-    @Html.ActionLink("Перейти к заметкам","ShowNotes","Note")
+    @Html.ActionLink("Перейти к заметкам", "ShowNotes", "Note")
 </div>

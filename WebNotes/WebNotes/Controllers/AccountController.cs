@@ -18,25 +18,37 @@ namespace WebNotes.Controllers
         {
 
         }
-
         public ActionResult Login()
         {
+            if (userRepository.FindByLogin("admin") == null)
+            {
+                CreateUser("admin", "123456");
+            }
             return View();
         }
+  
 
         [HttpPost]
         public ActionResult Login(LoginViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result = SignInManager.PasswordSignIn(model.UserName, model.Password, false, false);
-                if (result == SignInStatus.Success)
+                var user = userRepository.FindByLogin(model.UserName);
+                if (user.Status == Status.Active)
                 {
-                    return RedirectToAction("Index", "Home");
+                    var result = SignInManager.PasswordSignIn(model.UserName, model.Password, false, false);
+                    if (result == SignInStatus.Success)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Неверное имя пользователя или пароль");
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Неверное имя пользователя или пароль");
+                    ModelState.AddModelError("", "Учетная запись заблокирована!");
                 }
             }
             return View(model);
@@ -45,26 +57,31 @@ namespace WebNotes.Controllers
         public ActionResult LogOff()
         {
             SignInManager.SignOut();
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Login", "Account");
         }
 
-        public ActionResult CreateUser(string login, string password)
+        public ActionResult CreateUser(string Login, string Password)
         {
-            var user = new User { UserName = login };
-            var result = UserManager.CreateAsync(user, password);
+            var user = new User { UserName = Login };
+            var result = UserManager.CreateAsync(user, Password);
             if (result.Result.Succeeded)
             {
-                SignInManager.SignIn(user, false, false);
+               user = userRepository.Load(1);
+                user.Status = Status.Active;
+                user.Permission = Permission.Admin;
+                return RedirectToAction("Login", "Account");
             }
             else
             {
                 foreach (var error in result.Result.Errors)
                 {
-                    ModelState.AddModelError("", error);
+                    ModelState.AddModelError("", "");
                 }
+                return RedirectToAction("Index", "Home");
             }
-            return RedirectToAction("Index", "Home");
         }
+
+        
 
         // GET: Account
         public ActionResult Index()

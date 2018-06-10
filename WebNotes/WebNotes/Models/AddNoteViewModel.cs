@@ -15,7 +15,7 @@ namespace WebNotes.Models
         [Display(Name = "Название заметки")]
         public string Name { get; set; }
 
-       
+       [DataType(DataType.MultilineText)]
         [Display(Name = "Текст заметки")]
         public string Text { get; set; }
 
@@ -31,5 +31,6 @@ namespace WebNotes.Models
         [Display(Name = "Файл")]
         [Required]
         public HttpPostedFileBase File { get; set; }
+
     }
 }
